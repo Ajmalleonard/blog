@@ -1,6 +1,6 @@
-ajmalmaker/node_modules/
+client/node_modules/
 .env
-ajmalmaker/.next/
+client/.next/
 api/node_modules/
 .DS_Store
 .env.local
