@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0f141b;
+  --text: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+}
+body {
+  color: var(--text);
+
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+@layer utilities {
+  .FlexCenter {
+    @apply flex justify-center items-center;
+  }
+
+  .FlexBetween {
+    @apply flex justify-between items-center;
+  }
+  .FlexStart {
+    @apply flex justify-start items-center;
+  }
+  .FlexSatrt-col {
+    @apply flex justify-start items-start flex-col;
+  }
+  .FlexEnd {
+    @apply flex justify-end items-center;
+  }
+  .subheading {
+    @apply pb-8  text-start text-redish-50;
+  }
+  .heading {
+    @apply text-xl font-bold max-w-[450px] text-start text-dark-20 hover:text-white;
+  }
+}

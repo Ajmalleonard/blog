@@ -1,0 +1,7 @@
+ajmalmaker/node_modules/
+.env
+ajmalmaker/.next/
+api/node_modules/
+.DS_Store
+.env.local
+
