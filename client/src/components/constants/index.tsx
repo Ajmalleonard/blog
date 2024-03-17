@@ -282,3 +282,23 @@ Responsive Design Checker: Online tools that help you test your website's respon
 ];
 
 // constants.js
+export const featuresfroAccount = [
+  {
+    title: "Get all features & Tools",
+    icon: "/track.svg",
+    details:
+      "Monitor your advancement seamlessly through the application interface, meticulously tracking your milestones and achievements. Earn prestigious badges denoting completion as a testament to your dedication and proficiency within the platform. ",
+  },
+  {
+    title: " Get instantaneous Updates",
+    icon: "/news.svg",
+    details:
+      "Stay consistently informed and engaged with the latest updates, seamlessly delivered to you on a daily basis. Additionally, enrich your experience with invaluable tips and tricks conveniently dispatched to your email inbox. ",
+  },
+  {
+    title: "Free Premium Resources",
+    icon: "/premium.svg",
+    details:
+      "Access an array of complimentary premium resources designed to elevate your coding proficiency. From comprehensive plans and detailed roadmaps to cutting-edge features, empower yourself with tools that will revolutionize your coding journe",
+  },
+];
