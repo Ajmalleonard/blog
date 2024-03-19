@@ -11,6 +11,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        "bounce-slow": "bounce 20s ease-in-out infinite",
+      },
       colors: {
         blue: {
           20: "#617BFF",
@@ -24,6 +27,11 @@ const config: Config = {
         },
         redish: {
           50: "#FF0A78",
+        },
+        textC: {
+          30: "#F1D7D2",
+          50: "#FCAACF ",
+          60: "#D3C0E5",
         },
       },
 

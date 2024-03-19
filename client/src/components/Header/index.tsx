@@ -142,7 +142,11 @@ function Header() {
                 Register
               </Button>
             </Link>
-            <GitLogo />
+
+            <Link href="https://github.com/Ajmalleonard">
+              {" "}
+              <GitLogo />
+            </Link>
           </NavbarItem>
         </NavbarContent>
       </Navbar>

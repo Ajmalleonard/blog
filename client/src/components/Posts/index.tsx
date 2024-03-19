@@ -17,7 +17,7 @@ function Posts() {
   };
 
   return (
-    <div className="flex gap-10 flex-col my-10 rounded-3xl p-5 w-full bg-dark-50 md:w-[60%] h-full">
+    <div className="flex gap-10 flex-col mx-auto my-10 rounded-3xl p-5 w-full bg-dark-50 md:w-[60%] h-full">
       <h3 className="subheading">RECENTLY PUBLISHED</h3>
       <div className="flex gap-1 space-y-1 flex-wrap w-full">
         {posts.map((post, index) => (

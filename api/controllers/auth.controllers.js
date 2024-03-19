@@ -5,7 +5,7 @@ import user from "../models/user.model.js";
 export const Login = async (req, res, next) => {
   try {
     // Find user by username
-    const User = await user.findOne({ name: req.body.username });
+    const User = await user.findOne({ name: req.body.name });
     if (!User) return next("User not found");
 
     // Compare passwords

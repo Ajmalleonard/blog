@@ -4,7 +4,7 @@ import TableOfContent from "@/components/table_of_contents";
 
 function SinglePost() {
   return (
-    <section className="flex flex-col lg:max-w-7xl h-auto ">
+    <section className="flex mx-auto flex-col lg:max-w-7xl h-auto ">
       <div className="bg-black flex gap-4 justify-start items-center h-[140px] px-4">
         <div className="flex gap-1 p-4  bg-dark-40 rounded-xl w-[210px]">
           <Link href={"/"}>

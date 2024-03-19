@@ -40,8 +40,8 @@ function Logo() {
           y2="-23.87"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="white" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_1009_58"
@@ -51,8 +51,8 @@ function Logo() {
           y2="-23.87"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="white" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_1009_58"
@@ -62,8 +62,8 @@ function Logo() {
           y2="-24.1094"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="white" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
         <clipPath id="clip0_1009_58">
           <rect width="19" height="30" fill="white" />
