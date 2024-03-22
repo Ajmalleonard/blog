@@ -7,6 +7,7 @@ import { featuresfroAccount } from "@/components/constants";
 import Account from "../register/account";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { userAgentFromString } from "next/server";
 
 // Define action types (if you plan to expand the reducer's function)
 type ActionType = {
@@ -60,31 +61,32 @@ const page = () => {
     if (!formValue.username || !formValue.password) {
       // No type assertion needed now
       setErrerMessage("Fill all required fields");
-      return;
     }
 
     try {
       setisLoading(true);
-      const res = await fetch("http://localhost:1000/user/login", {
+      const res = await fetch("http://localhost:1000/user/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" }, // Corrected typo here
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formValue),
       });
       const data = await res.json();
-      if (data.success === true) {
-        setisLoading(false);
+      if (res.ok) {
         setErrerMessage(null);
+        setisLoading(false);
+        console.log("Redirecting to signin...");
+        router.push("/login");
+        // Add console log here
       } else if (data.success === false) {
         setisLoading(false);
         setErrerMessage(data.message);
       }
-      if (res.ok) {
-        router.push("/dashboard");
-      }
+
       // ... handle the response ...
     } catch (err) {
       setisLoading(false);
-      setErrerMessage(" strange error occurred");
+      setErrerMessage("Strange error occurred");
+      console.error(err); // Log any errors
     } finally {
       setisLoading(false); // Reset loading state on success or error
     }
@@ -114,6 +116,12 @@ const page = () => {
                 onChange={handleChange}
               />
               <Input
+                type="email"
+                id="email"
+                label="email"
+                onChange={handleChange}
+              />
+              <Input
                 id="password"
                 type="password"
                 label="Password"
@@ -132,14 +140,14 @@ const page = () => {
                     <span className="text-[12px] text-white ">Loading...</span>
                   </>
                 ) : (
-                  "Signin"
+                  "Create Account"
                 )}
               </Button>
               <p className="text-gray-500 text-[12px]">
-                You Are New Here ?
+                Alredy a User ?
                 <span>
-                  <a className="text-white" href="/account">
-                    Register
+                  <a className="text-white mx-2" href="/login">
+                    Sign in
                   </a>
                 </span>
               </p>
@@ -148,7 +156,7 @@ const page = () => {
         </form>
         <div className="flex w-full lg:w-[60%] relative p-5 justify-center items-center rounded-xl overflow-clip ring-1 ring-gray-600">
           <Image
-            className="absolute -bottom-2 w-auto -left-4"
+            className="absolute w-auto  -bottom-2 -left-4"
             src={"/curve.svg"}
             alt={"carved"}
             width={200}

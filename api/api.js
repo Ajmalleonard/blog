@@ -5,6 +5,9 @@ import cookieParser from "cookie-parser";
 import Authenticator from "./routers/auth.route.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
+
+const app = express();
 
 const api = express();
 api.use(express.json());
@@ -16,13 +19,14 @@ api.get("/", (req, res) => {
 });
 
 //middleware
+api.use(cors({ origin: "http://localhost:3000" }));
 api.use(cookieParser());
 api.use("/ajmalmaker/", blogRouter);
-api.use("/auth/", Authenticator);
+api.use("/user/", Authenticator);
 
 //Next middleware
 api.use((err, req, res, next) => {
-  const errorStatus = err.status || 500; // Set error status depending on error
+  const errorStatus = err.status || 400; // Set error status depending on error
   const errorMessage = err.message || "Something went wrong!";
 
   return res.status(errorStatus).json({

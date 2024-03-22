@@ -302,3 +302,73 @@ export const featuresfroAccount = [
       "Access an array of complimentary premium resources designed to elevate your coding proficiency. From comprehensive plans and detailed roadmaps to cutting-edge features, empower yourself with tools that will revolutionize your coding journe",
   },
 ];
+
+export const footer = {
+  firstrow: {
+    logo: "/logo2.svg",
+    copyright: "© 2020-present Ajmal Leonard. All Rights Reserved.",
+    thanks: "Thanks for reading!",
+  },
+  tutorial: {
+    title: "Tutorial",
+    data: [
+      {
+        title: "React.js",
+        href: "#",
+      },
+      {
+        title: " Redux",
+        href: "#",
+      },
+      {
+        title: "Nextjs",
+        href: "#",
+      },
+      {
+        title: "CSS",
+        href: "#",
+      },
+      {
+        title: "Javascript",
+        href: "#",
+      },
+      {
+        title: "Performance",
+        href: "#",
+      },
+      {
+        title: "Animation",
+        href: "#",
+      },
+      {
+        title: "Career",
+        href: "#",
+      },
+      {
+        title: "Next.js",
+        href: "#",
+      },
+    ],
+  },
+  Links: {
+    title: "Connect",
+    data: [
+      {
+        href: "https://twitter.com/ajmal_leonard",
+        title: "twitter",
+      },
+      {
+        href: "ajmal@ajmalmaker.com",
+        title: "contact",
+      },
+      {
+        href: "/privacy",
+        title: "Privacy Policy",
+      },
+      {
+        href: "https://www.linkedin.com/in/ajmal-leonard/",
+        title: "Terms of Use",
+      },
+    ],
+  },
+};

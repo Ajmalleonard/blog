@@ -128,7 +128,7 @@ function Header() {
         </NavbarContent>
         <NavbarContent justify="end" className="hidden sm:flex">
           <NavbarItem className="FlexBetween flex-row-reverse gap-3">
-            <Link href={"/account"}>
+            <Link href={"/register"}>
               {" "}
               <Button
                 variant="bordered"
@@ -143,7 +143,11 @@ function Header() {
               </Button>
             </Link>
 
-            <Link href="https://github.com/Ajmalleonard">
+            <Link
+              href="https://github.com/Ajmalleonard"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {" "}
               <GitLogo />
             </Link>

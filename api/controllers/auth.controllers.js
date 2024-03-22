@@ -1,25 +1,28 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import user from "../models/user.model.js";
+import { errorMaster } from "../utilities/error.utility.js";
 
 export const Login = async (req, res, next) => {
+  const { username, password } = req.body;
   try {
     // Find user by username
-    const User = await user.findOne({ name: req.body.name });
+    const User = await user.findOne({ username });
+    if (!username || !password || username === "" || password === "")
+      return next(errorMaster(400, "All Fields are required"));
+
     if (!User) return next("User not found");
 
     // Compare passwords
-    const isMatch = await bcrypt.compare(req.body.password, User.password);
-    if (!isMatch) return next("Password authentication failed");
+    const isMatch = await bcrypt.compare(password, User.password);
+    if (!isMatch) return next(errorMaster(404, "Invalid password"));
 
-    // Generate JWT token with user ID, name, and isAdmin flag
     const token = jwt.sign(
-      { id: User._id, name: User.name, isAdmin: User.isAdmin },
+      { id: User._id, username: User.username, isAdmin: User.isAdmin },
       process.env.JWTKEY,
       { expiresIn: "2h" }
     );
 
-    // Set access token cookie and send response
     res
       .cookie("access_token", token, {
         httpOnly: true,
@@ -27,7 +30,7 @@ export const Login = async (req, res, next) => {
       .status(200)
       .json({
         message: "Successfully logged in",
-        user: { name: User.name }, // Return user's name in the response
+        user: { username: User.username, email: User.email }, // Return user's name in the response
       });
   } catch (err) {
     next(err);
@@ -36,16 +39,18 @@ export const Login = async (req, res, next) => {
 
 export const Register = async (req, res, next) => {
   const hash = bcrypt.genSaltSync(10);
-  const password = bcrypt.hashSync(req.body.password, hash);
+  const { username, email, password } = req.body;
+
+  const hashedPasword = bcrypt.hashSync(password, hash);
 
   try {
     const new_user = new user({
-      name: req.body.name,
-      email: req.body.email,
-      password: password,
+      username: username,
+      email: email,
+      password: hashedPasword,
     });
     await new_user.save();
-    res.status(200).send("You're Successfully registered");
+    res.status(200).json("Successfully registered");
   } catch (err) {
     next(err);
   }

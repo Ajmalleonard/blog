@@ -13,6 +13,7 @@ const config: Config = {
     extend: {
       animation: {
         "bounce-slow": "bounce 20s ease-in-out infinite",
+        "bounce-easy": "bounce 30s ease-in-out infinite",
       },
       colors: {
         blue: {
