@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Newsletter from "@/components/Newsletter/index.newsletters";
+import ReduxProvider from "@/Redux/Redux";
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -22,12 +23,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <main className="dark text-foreground bg-background">{children}</main>
-        <Newsletter/>
-        <Footer />
-      </body>
+      <ReduxProvider>
+        <body className={inter.className}>
+          <Header />
+          <main className="dark text-foreground bg-background">{children}</main>
+          <Newsletter />
+          <Footer />
+        </body>
+      </ReduxProvider>
     </html>
   );
 }

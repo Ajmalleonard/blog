@@ -5,9 +5,15 @@ import { Button, Input, Spinner } from "@nextui-org/react";
 import Image from "next/image";
 import { featuresfroAccount } from "@/components/constants";
 import Account from "../register/account";
-import Link from "next/link";
+
 import { useRouter } from "next/navigation";
-import { userAgentFromString } from "next/server";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInError,
+  signInStart,
+  signInSuccess,
+  UserState,
+} from "@/Redux/user/userSlicer";
 
 // Define action types (if you plan to expand the reducer's function)
 type ActionType = {
@@ -38,12 +44,12 @@ const reducer = (state: StateType, action: ActionType) => {
 };
 
 const page = () => {
-  // ... reducer logic ...
+  const dispatch = useDispatch();
+  const { loading, errorMessage } = useSelector(
+    (state: { user: UserState }) => state.user
+  );
 
   const router = useRouter();
-
-  const [isLoading, setisLoading] = useState(false);
-  const [erroMesage, setErrerMessage] = useState<string | null>(null);
 
   // Initialize formValue with the correct type and initial values
   const [formValue, setFormValue] = useState<FormValues>({
@@ -51,20 +57,22 @@ const page = () => {
     password: "",
   });
 
+  //handleling Form Change
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormValue({ ...formValue, [e.target.id]: e.target.value });
     console.log(formValue);
   };
 
+  //Handling form submission
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!formValue.username || !formValue.password) {
       // No type assertion needed now
-      setErrerMessage("Fill all required fields");
+      dispatch(signInError("Fill all required fields"));
     }
 
     try {
-      setisLoading(true);
+      dispatch(signInStart());
       const res = await fetch("http://localhost:1000/user/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -72,23 +80,18 @@ const page = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        setErrerMessage(null);
-        setisLoading(false);
-        console.log("Redirecting to signin...");
+        dispatch(signInSuccess(data));
         router.push("/login");
         // Add console log here
       } else if (data.success === false) {
-        setisLoading(false);
-        setErrerMessage(data.message);
+        dispatch(signInError(data.message));
       }
 
       // ... handle the response ...
     } catch (err) {
-      setisLoading(false);
-      setErrerMessage("Strange error occurred");
+      dispatch(signInError("Something went wrong"));
+
       console.error(err); // Log any errors
-    } finally {
-      setisLoading(false); // Reset loading state on success or error
     }
   };
 
@@ -128,13 +131,13 @@ const page = () => {
                 onChange={handleChange}
               />
 
-              {erroMesage && (
+              {errorMessage && (
                 <p className=" bg-redish-50/5 p-3 rounded-lg text-[12px]  text-white">
-                  {erroMesage}
+                  {errorMessage}
                 </p>
               )}
               <Button color="danger" variant="bordered" type="submit">
-                {isLoading ? (
+                {loading ? (
                   <>
                     <Spinner color="danger" size="sm" />
                     <span className="text-[12px] text-white ">Loading...</span>
