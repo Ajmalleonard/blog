@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function Footer() {
   return (
-    <footer className="w-full mx-auto h-auto min-h-[200px] bg-dark-50 p-5">
+    <footer className="w-full mx-auto max-w-4xl h-auto min-h-[200px] bg-dark-50 p-5">
       <div className="flex flex-wrap gap-5 justify-between max-w-5xl mx-auto">
         <div className="flex flex-col gap-5">
           <div className="flex w-[200px] bg- h-auto  gap-3 ">

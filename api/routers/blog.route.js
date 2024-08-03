@@ -5,17 +5,15 @@ import {
   deleteBlog,
   updateBlog,
   getBlog,
+  getBlogs,
 } from "../controllers/blog.controller.js";
 
 const route = express.Router();
 
-route.get("/", (req, res) => {
-  res.send("This is the post page");
-});
-
-route.post("/create-blog", verifyAdmin, createBlog);
-route.get("/:id", getBlog);
-route.delete("/delete-blog/:id", verifyAdmin, deleteBlog);
-route.put("/update-blog/:id", verifyAdmin, updateBlog);
+route.post("/create", verifyAdmin, createBlog); // Changed to /create
+route.get("/:slug", getBlog); // Changed to /:id
+route.get("/", getBlogs); // No change
+route.delete("/delete/:id", verifyAdmin, deleteBlog); // Changed to /delete/:id
+route.put("/update/:id", verifyAdmin, updateBlog); // Changed to /update/:id
 
 export default route;

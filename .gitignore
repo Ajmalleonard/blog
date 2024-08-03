@@ -4,4 +4,5 @@ client/.next/
 api/node_modules/
 .DS_Store
 .env.local
+.contentlayer
 

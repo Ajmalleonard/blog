@@ -11,6 +11,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-geist-sans)"],
+        mono: ["var(--font-geist-mono)"],
+      },
       animation: {
         "bounce-slow": "bounce 20s ease-in-out infinite",
         "bounce-easy": "bounce 30s ease-in-out infinite",

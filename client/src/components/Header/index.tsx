@@ -1,8 +1,9 @@
 "use client";
-
-import Logo from "./logo";
+import { RiTwitterXFill } from "react-icons/ri";
+import { SiGithub } from "react-icons/si";
+import { TbMessage2Bolt } from "react-icons/tb";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-
 import {
   NavbarBrand,
   Navbar,
@@ -16,81 +17,101 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
+  Avatar,
 } from "@nextui-org/react";
-
-import GitLogo from "./GitLogo";
-
-import Logo2 from "./logo2";
+import { TableDocument } from "iconsax-react";
 
 function Header() {
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const isVisible =
+        prevScrollPos > currentScrollPos || currentScrollPos < 10;
+
+      setPrevScrollPos(currentScrollPos);
+      setVisible(isVisible);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos]);
+
   return (
-    <header className="w-full h-auto sticky z-50 top-0  border-b-1 border-gray-600">
+    <header
+      className={`w-full max-w-4xl mb-[70px] mx-auto rounded-3xl overflow-clip h-auto sticky z-50 transition-all duration-700 ${
+        visible ? "top-[50px] shadow-md" : "-top-full"
+      } border-b-1 border-gray-600`}
+    >
       <Navbar
         isBlurred={true}
         position="sticky"
-        className="max-w-7xl mx-auto w-full flex "
+        className="max-w-7xl mx-auto w-full flex"
       >
         {/* mobile Navbar */}
         <div className="flex justify-between w-full items-center sm:hidden">
-          <NavbarContent className="sm:hidden max-w-5" justify="start">
-            <NavbarMenuToggle></NavbarMenuToggle>
-          </NavbarContent>
-
-          <NavbarContent className="flex sm:hidden " justify="center">
+          <NavbarContent className="flex sm:hidden" justify="center">
             <NavbarBrand>
-              <Logo />
+              <Avatar src="/avatar.JPG" radius="full" />
             </NavbarBrand>
           </NavbarContent>
 
           <NavbarContent
-            className="sm:hidden  max-h-[24px] max-w-[24px] "
+            className="sm:hidden max-h-[24px] max-w-[24px]"
             justify="end"
           >
-            <Link href="https://github.com/Ajmalleonard">
-              <GitLogo />
+            <Link className="flex gap-3 items-center" href={"/register"}>
+              <Button
+                variant="bordered"
+                isIconOnly
+                size="sm"
+                className="cursor-pointer group hover:transition-all hover:duration-700 ease-in hover:shadow-xl hover:shadow-redish-50 hover:bg-redish-50 w-fit FlexCenter"
+                color="danger"
+              >
+                <RiTwitterXFill className="text-lg group-hover:text-white" />
+              </Button>
+              Twitter
+            </Link>{" "}
+            <Link
+              className="flex items-center gap-3"
+              href={"https://github.com/Ajmalleonard"}
+            >
+              <Button
+                variant="bordered"
+                isIconOnly
+                size="sm"
+                className="cursor-pointer group hover:transition-all hover:duration-700 ease-in hover:shadow-xl hover:shadow-redish-50 hover:bg-redish-50 w-fit FlexCenter"
+                color="danger"
+              >
+                <SiGithub className="text-lg group-hover:text-white" />
+              </Button>
+              Github
+            </Link>{" "}
+            <Link
+              className="flex gap-3 items-center"
+              href={"https://github.com/Ajmalleonard"}
+            >
+              <Button
+                variant="bordered"
+                isIconOnly
+                size="sm"
+                className="cursor-pointer group hover:transition-all hover:duration-700 ease-in hover:shadow-xl hover:shadow-redish-50 hover:bg-redish-50 w-fit FlexCenter"
+                color="danger"
+              >
+                <TbMessage2Bolt className="text-lg group-hover:text-white" />{" "}
+              </Button>
+              Blogs
             </Link>
           </NavbarContent>
-        </div>{" "}
-        <NavbarMenu>
-          <NavbarMenuItem>
-            <Link color="foreground" href="#">
-              Latests
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <Link color="foreground" href="#">
-              <Dropdown backdrop="blur">
-                <DropdownTrigger>Posts</DropdownTrigger>
-                <DropdownMenu variant="faded" aria-label="Static Actions">
-                  <DropdownItem key="react">React</DropdownItem>
-                  <DropdownItem key="animation">Animation</DropdownItem>
-                  <DropdownItem key="CSS">CSS</DropdownItem>
-                  <DropdownItem
-                    key="delete"
-                    className="text-danger"
-                    color="danger"
-                  >
-                    News
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <Link color="foreground" href="#">
-              Goodies
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <Link color="danger" href="#">
-              Learn
-            </Link>
-          </NavbarMenuItem>
-        </NavbarMenu>
+        </div>
+
         {/* desktop Navbar */}
         <NavbarContent justify="start">
           <NavbarBrand className="hidden sm:flex">
-            <Logo2 />
+            <Avatar src="/avatar.JPG" isBordered size="lg" radius="full" />
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent justify="center" className="hidden sm:flex gap-4">
@@ -127,29 +148,39 @@ function Header() {
           </NavbarItem>
         </NavbarContent>
         <NavbarContent justify="end" className="hidden sm:flex">
-          <NavbarItem className="FlexBetween flex-row-reverse gap-3">
+          <NavbarItem className="FlexBetween flex-row gap-3">
             <Link href={"/register"}>
-              {" "}
               <Button
                 variant="bordered"
+                isIconOnly
                 size="sm"
-                className=" cursor-pointer  FlexCenter"
+                className="cursor-pointer group hover:transition-all hover:duration-700 ease-in hover:shadow-xl hover:shadow-redish-50 hover:bg-redish-50 w-fit FlexCenter"
                 color="danger"
               >
-                <span className="mr-[2px]">
-                  <>{"</>"}</>
-                </span>
-                Register
+                <RiTwitterXFill className="text-lg group-hover:text-white" />
               </Button>
-            </Link>
-
-            <Link
-              href="https://github.com/Ajmalleonard"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {" "}
-              <GitLogo />
+            </Link>{" "}
+            <Link href={"https://github.com/Ajmalleonard"}>
+              <Button
+                variant="bordered"
+                isIconOnly
+                size="sm"
+                className="cursor-pointer group hover:transition-all hover:duration-700 ease-in hover:shadow-xl hover:shadow-redish-50 hover:bg-redish-50 w-fit FlexCenter"
+                color="danger"
+              >
+                <SiGithub className="text-lg group-hover:text-white" />
+              </Button>
+            </Link>{" "}
+            <Link href={"/posts"}>
+              <Button
+                variant="bordered"
+                isIconOnly
+                size="sm"
+                className="cursor-pointer group hover:transition-all hover:duration-700 ease-in hover:shadow-xl hover:shadow-redish-50 hover:bg-redish-50 w-fit FlexCenter"
+                color="danger"
+              >
+                <TbMessage2Bolt className="text-lg group-hover:text-white" />
+              </Button>
             </Link>
           </NavbarItem>
         </NavbarContent>

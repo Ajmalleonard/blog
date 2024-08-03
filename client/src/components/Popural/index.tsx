@@ -6,7 +6,7 @@ function Popural() {
   return (
     <div className="FlexSatrt-col w-[100%]">
       <h3 className="subheading">POPULAR CONTENT</h3>
-      <div className="lg:w-[80%] md:w-[100%] flex gap-1 space-y-1 flex-wrap mx-auto">
+      <div className="lg:w-[80%] md:w-[100%]  flex gap-1 space-y-1 flex-wrap mx-auto">
         {posts.map((item, index) => {
           return (
             <PopularButton

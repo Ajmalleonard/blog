@@ -2,9 +2,31 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
+const codeBlockSchema = new Schema({
+  language: {
+    type: String,
+    required: true,
+  },
+  code: {
+    type: String,
+    required: true,
+  },
+  title: String,
+  highlightedLines: [Number],
+  showLineNumbers: {
+    type: Boolean,
+    default: false,
+  },
+});
+
 const blog = new Schema(
   {
     title: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    slug: {
       type: String,
       required: true,
       unique: true,
@@ -22,7 +44,6 @@ const blog = new Schema(
       ref: "User",
       required: true,
     },
-
     tags: [
       {
         type: String,
@@ -39,6 +60,16 @@ const blog = new Schema(
       type: Number,
       default: 0,
     },
+    codeBlocks: {
+      type: [codeBlockSchema],
+      default: undefined,
+    },
+    series: {
+      type: String,
+      default: undefined,
+    },
+    publishedAt: Date,
+    lastModified: Date,
   },
   { timestamps: true }
 );

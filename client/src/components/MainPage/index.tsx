@@ -4,10 +4,13 @@ import Posts from "../Posts";
 
 function MainPage() {
   return (
-    <div className="max-w-7xl flex justify-around items-start  ">
+    <section
+      className=" w-full  py-20 gap-4  flex justify-center
+     items-center  "
+    >
       <Posts />
-      <SideBar />
-    </div>
+      {/* <SideBar /> */}
+    </section>
   );
 }
 

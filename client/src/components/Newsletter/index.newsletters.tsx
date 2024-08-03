@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Newsletter = () => {
   return (
-    <section className=" select-none py-32 relative flex w-full items-center justify-center  min-h-[500px] ">
+    <section className=" select-none mx-auto py-32 max-w-4xl relative flex w-full items-center justify-center  min-h-[500px] ">
       <div className="flex rounded-full absolute filter blur-[400px] bg-gradient-to-r -z-1 min-w-[500px] min-h-[500px] aspect-square"></div>
       <div className="max-w-5xl  h-auto py-10 flex z-10 px-10   flex-col-reverse lg:flex-row  ">
         <div className="flex w-full flex-col gap-5  md:w-full lg:w-[80%]">
@@ -20,7 +20,7 @@ const Newsletter = () => {
             anytime.
           </p>
 
-          <div className="flex gap-4 w-full">
+          <div className="flex gap-4  w-full">
             <form className="flex w-full max-w-[90%] gap-4 items-center justify-start">
               <div className="flex max-w-[80%] gap-2 ">
                 <Input

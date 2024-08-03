@@ -11,29 +11,42 @@ const app = express();
 
 const api = express();
 api.use(express.json());
-const port = 1000;
+const port = 1010;
 
 dotenv.config();
 api.get("/", (req, res) => {
-  res.send("Hello World");
+  res.json("Hello World");
 });
 
+const corsOptions = {
+  origin: [
+    "https://ajmaljs.com",
+    "https://admin.ajmaljs.com",
+    "https://www.ajmaljs.com",
+    "http://localhost:3000",
+    "http://localhost:3001",
+  ],
+  optionsSuccessStatus: 200,
+  credentials: true,
+};
+
 //middleware
-api.use(cors({ origin: "http://localhost:3000" }));
+api.use(cors(corsOptions));
 api.use(cookieParser());
-api.use("/ajmalmaker/", blogRouter);
-api.use("/user/", Authenticator);
+api.use("/api/blogs", blogRouter);
+
+api.use("api/auth", Authenticator);
 
 //Next middleware
-api.use((err, req, res, next) => {
-  const errorStatus = err.status || 400; // Set error status depending on error
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong!";
 
   return res.status(errorStatus).json({
     success: false,
     status: errorStatus,
     message: errorMessage,
-    stack: process.env.NODE_ENV === "development" ? err.stack : null, // Stack trace in development
+    stack: process.env.NODE_ENV === "development" ? err.stack : null,
   });
 });
 
@@ -41,7 +54,7 @@ api.use((err, req, res, next) => {
 
 const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO);
+    await mongoose.connect(process.env.DB);
     console.log("Connected to MongoDB");
   } catch (err) {
     throw err;
