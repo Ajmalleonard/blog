@@ -35,7 +35,7 @@ api.use(cors(corsOptions));
 api.use(cookieParser());
 api.use("/api/blogs", blogRouter);
 
-api.use("api/auth", Authenticator);
+api.use("/api/auth", Authenticator);
 
 //Next middleware
 app.use((err, req, res, next) => {
