@@ -23,7 +23,7 @@ function page() {
 
   return (
     <div className="max-w-4xl py-32 w-full min-h-screen">
-      <div onClick={() => Router.push("/")} className="flex justify-start">
+      <div onClick={() => router.push("/")} className="flex justify-start">
         <ArrowLeft />
         <p>AllPost</p>
       </div>
